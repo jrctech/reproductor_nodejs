@@ -13,6 +13,16 @@
                 <li class="cancion">Canción 1</li>
             </ul>
         </div>
+
+        <div class="contenedor-derecho">
+            <audio class = "audio" src="/canciones/Yo se quien soy yo - Danilo Montero.mp3" controls></audio>
+        </div>
+
+        <form class="upload-form" action="/canciones" method="post" enctype="multipart/form-data">
+            Subir canción:
+            <input type="file" name="cancion">
+            <input type="submit" value="Subir">
+        </form>
     </div>
     
     <script src="/jquery/jquery.js"></script>
