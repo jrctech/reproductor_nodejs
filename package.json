@@ -20,7 +20,8 @@
   "homepage": "https://github.com/jrctech/reproductor_nodejs#readme",
   "dependencies": {
     "express": "^4.17.1",
-    "jquery": "^3.5.1"
+    "jquery": "^3.5.1",
+    "mediaserver": "^0.1.1"
   },
   "devDependencies": {
     "nodemon": "^2.0.5"
