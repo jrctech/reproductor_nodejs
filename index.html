@@ -3,9 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Reproductor</title>
+    <link rel="stylesheet" href="/css/main.css">
 </head>
 <body>
+    <h1>Audio Stream JRC Tech</h1>
     <div class="app">
         <div class="contenedor-izquierdo">
             <ul class="lista-canciones">
@@ -15,7 +18,8 @@
         </div>
 
         <div class="contenedor-derecho">
-            <audio class = "audio" src="/canciones/Yo se quien soy yo - Danilo Montero.mp3" controls></audio>
+            <audio class = "audio" src="" controls></audio>
+            <label class ="cancion-actual"></label>
         </div>
 
         <form class="upload-form" action="/canciones" method="post" enctype="multipart/form-data">
