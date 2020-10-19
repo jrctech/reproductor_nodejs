@@ -25,6 +25,7 @@ app.get('/', function(req, res){
 
 app.get('/canciones', function(req,res) {
     //Actualiza la lista de archivos en el archivo canciones.json
+    //var archivos = fs.readdirSync(path.join(__dirname, 'canciones'));
     fs.readdir(path.join(__dirname, 'canciones'), function(err, archivos){
         if (err) throw err;
         var canciones = JSON.parse("[]");
@@ -34,13 +35,18 @@ app.get('/canciones', function(req,res) {
         //console.log(canciones);
         fs.writeFile(path.join(__dirname, 'canciones.json'), JSON.stringify(canciones), function(err){
             if (err) throw err;
+            //Lee el archivo canciones.json
+            fs.readFile(path.join(__dirname, 'canciones.json'), 'utf8', function(err, canciones){
+                if(err) throw err;
+                res.json(JSON.parse(canciones));
+            });
         });
 
         //Lee el archivo canciones.json
-        fs.readFile(path.join(__dirname, 'canciones.json'), 'utf8', function(err, canciones){
+        /* fs.readFile(path.join(__dirname, 'canciones.json'), 'utf8', function(err, canciones){
             if(err) throw err;
             res.json(JSON.parse(canciones));
-        });
+        }); */
     });
 
     
