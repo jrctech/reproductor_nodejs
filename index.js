@@ -26,7 +26,6 @@ app.get('/', function(req, res){
 app.get('/canciones', function(req,res) {
     console.log('New ' + req.method + ' Host: ' + req.headers.host);
     //Actualiza la lista de archivos en el archivo canciones.json
-    //var archivos = fs.readdirSync(path.join(__dirname, 'canciones'));
     fs.readdir(path.join(__dirname, 'canciones'), function(err, archivos){
         if (err) throw err;
         var canciones = JSON.parse("[]");
