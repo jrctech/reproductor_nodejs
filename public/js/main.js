@@ -5,17 +5,17 @@ $(function () { //Esta función se ejecuta al cargar el DOM (sintaxis de jquery)
     var audio = $('audio');
 
     audio[0].addEventListener('ended', function(){
-        console.log('Play has ended');
+        //console.log('Play has ended');
         elemActual.style.color = "#dfe0e6";
         indice++;
         if (arrayCanciones[indice] != undefined){
-            console.log(indice);
+            //console.log(indice);
             audio[0].pause();
             audio.attr('src', '/canciones/' + arrayCanciones[indice].nombre);
-            document.getElementsByClassName('cancion-actual')[0].innerHTML = arrayCanciones[indice].nombre;
+            document.getElementsByClassName('cancion-actual')[0].innerHTML = '<marquee>' + arrayCanciones[indice].nombre + '</marquee>';
             audio[0].play();
             elemActual = document.getElementsByTagName('li')[indice];
-            elemActual.style.color="green";
+            elemActual.style.color="#4ad3dd";
         }
         else
         {
@@ -56,14 +56,50 @@ $(function () { //Esta función se ejecuta al cargar el DOM (sintaxis de jquery)
             }
             elemActual = evento.currentTarget;
             indice = parseInt(elemActual.attributes.indice.value);
-            elemActual.style.color = "green";
-            console.log(evento.currentTarget.attributes);
+            elemActual.style.color = "#4ad3dd";
+            //console.log(evento.currentTarget.attributes);
             audio[0].pause();  //Se refiere al objeto audio nativo del DOM
             audio.attr('src', '/canciones/' + evento.data.nombre);
-            document.getElementsByClassName('cancion-actual')[0].innerHTML = evento.data.nombre;
+            document.getElementsByClassName('cancion-actual')[0].innerHTML = '<marquee>' + evento.data.nombre + '</marquee>';
             audio[0].play();
             
         }
 
         cargarCanciones();
+
+        document.getElementById('prev').addEventListener('click', prev);
+        document.getElementById('next').addEventListener('click', next);
+
+        function prev(){
+            //console.log('Back!');
+            if (indice -1 >= 0){
+                if (arrayCanciones[indice-1] != undefined){
+                    indice--;
+                    elemActual.style.color = "#dfe0e6";
+                    //console.log(indice);
+                    audio[0].pause();
+                    audio.attr('src', '/canciones/' + arrayCanciones[indice].nombre);
+                    document.getElementsByClassName('cancion-actual')[0].innerHTML = '<marquee>' + arrayCanciones[indice].nombre + '</marquee>';
+                    audio[0].play();
+                    elemActual = document.getElementsByTagName('li')[indice];
+                    elemActual.style.color="#4ad3dd";
+                }
+            }
+        };
+
+        function next(){
+            //console.log('Next!');
+            if ((arrayCanciones[indice+1] != undefined) && (elemActual != undefined)){
+                indice++;
+                elemActual.style.color = "#dfe0e6";
+                //console.log(indice);
+                audio[0].pause();
+                audio.attr('src', '/canciones/' + arrayCanciones[indice].nombre);
+                document.getElementsByClassName('cancion-actual')[0].innerHTML = '<marquee>' + arrayCanciones[indice].nombre + '</marquee>';
+                audio[0].play();
+                elemActual = document.getElementsByTagName('li')[indice];
+                elemActual.style.color="#4ad3dd";
+            }
+            
+        };
     });
