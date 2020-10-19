@@ -24,6 +24,7 @@ app.get('/', function(req, res){
 });
 
 app.get('/canciones', function(req,res) {
+    console.log('New ' + req.method + ' Host: ' + req.headers.host);
     //Actualiza la lista de archivos en el archivo canciones.json
     //var archivos = fs.readdirSync(path.join(__dirname, 'canciones'));
     fs.readdir(path.join(__dirname, 'canciones'), function(err, archivos){
@@ -54,7 +55,7 @@ app.get('/canciones', function(req,res) {
 
 app.get('/canciones/:nombre', function(req, res) {
     var cancion = path.join(__dirname, 'canciones', req.params.nombre);
-    //console.log(cancion);
+    console.log('Requested: ', req.params.nombre);
     mediaserver.pipe(req, res, cancion);
 });
 
