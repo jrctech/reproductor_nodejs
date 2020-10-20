@@ -6,7 +6,9 @@ $(function () { //Esta función se ejecuta al cargar el DOM (sintaxis de jquery)
 
     audio[0].addEventListener('ended', function(){
         //console.log('Play has ended');
-        elemActual.style.color = "#dfe0e6";
+        if (elemActual != undefined){
+            elemActual.style.color = "#dfe0e6";
+        }
         indice++;
         if (arrayCanciones[indice] != undefined){
             //console.log(indice);
@@ -43,17 +45,17 @@ $(function () { //Esta función se ejecuta al cargar el DOM (sintaxis de jquery)
             });
 
             audio.attr('src','/canciones/' + canciones[0].nombre);
-            
+            elemActual = document.getElementsByTagName('li')[0];
+            elemActual.style.color = "#4ad3dd";
+            document.getElementsByClassName('cancion-actual')[0].innerHTML = '<marquee>' + canciones[0].nombre + '</marquee>';
                 
             }).fail(function(){
                 alert('No pude cargar las canciones');
             })
         }
 
-        function play(evento){
-            if (elemActual != undefined){
-                elemActual.style.color = "#dfe0e6";
-            }
+        function play(evento){  
+            elemActual.style.color = "#dfe0e6";
             elemActual = evento.currentTarget;
             indice = parseInt(elemActual.attributes.indice.value);
             elemActual.style.color = "#4ad3dd";
