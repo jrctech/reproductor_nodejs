@@ -1,4 +1,5 @@
 var arrayCanciones;
+var arrayCarpetas;
 var indice = 0;
 var elemActual = undefined;
 $(function () { //Esta función se ejecuta al cargar el DOM (sintaxis de jquery)
@@ -16,7 +17,7 @@ $(function () { //Esta función se ejecuta al cargar el DOM (sintaxis de jquery)
             audio.attr('src', '/canciones/' + arrayCanciones[indice].nombre);
             document.getElementsByClassName('cancion-actual')[0].innerHTML = '<marquee>' + arrayCanciones[indice].nombre + '</marquee>';
             audio[0].play();
-            elemActual = document.getElementsByTagName('li')[indice];
+            elemActual = document.getElementsByClassName('cancion')[indice];
             elemActual.style.color="#4ad3dd";
         }
         else
@@ -26,28 +27,55 @@ $(function () { //Esta función se ejecuta al cargar el DOM (sintaxis de jquery)
         }
     });
     
-    function cargarCanciones () {
+    function cargarCanciones (folder) {
         $.ajax({
-            url: '/canciones'
+            url: '/canciones/' + folder
         }).done(function (canciones) {
-            arrayCanciones = canciones;
-            //console.log(arrayCanciones);
+            arrayCanciones = [];
+            arrayCarpetas = [];
+            audio.attr('src','');
+            document.getElementsByClassName('cancion-actual')[0].innerHTML ='';
             var lista = $('.lista-canciones');
+            var listaCarpetas = $('.lista-carpetas');
             lista.empty();
+            listaCarpetas.empty();
+
+            if(canciones[0].path != 'canciones'){
+                $('<li class = subir><i class="fa-li fas fa-arrow-up"></i></i>Subir...</li>')
+                .on('click', subir)
+                .appendTo(listaCarpetas);
+            }
+
+            //$('.lbl-carpetas')[0].innerHTML = '<i class="far fa-folder-open">   '+folder;
             var i=0;
             canciones.forEach(function (cancion){
-                var nuevoElemento = $('<li indice = "' + i + '" class = "cancion">'+ cancion.nombre + '</li>');
-                nuevoElemento
-                    .on('click', cancion, play)
-                    .appendTo(lista);
-                i++;
-                
+                if (cancion.isDir){
+                    var nuevaCarpeta = $('<li class = carpeta><i class="fa-li far fa-folder"></i>' + cancion.nombre + '</li>');
+                    nuevaCarpeta
+                        .on('click', cancion, cambiarCarpeta)
+                        .appendTo(listaCarpetas);
+                    arrayCarpetas.push(cancion.nombre);
+                }
+                else if(cancion.extension == '.mp3'){
+                    var nuevoElemento = $('<li indice = "' + i + '" class = "cancion">'+ cancion.nombre + '</li>');
+                    nuevoElemento
+                        .on('click', cancion, play)
+                        .appendTo(lista);
+                    arrayCanciones.push(cancion);
+                    i++;
+                }
             });
+            if (arrayCarpetas.length == 0){
+                console.log('No hay subcarpetas');
+            }
 
-            audio.attr('src','/canciones/' + canciones[0].nombre);
-            elemActual = document.getElementsByTagName('li')[0];
-            elemActual.style.color = "#4ad3dd";
-            document.getElementsByClassName('cancion-actual')[0].innerHTML = '<marquee>' + canciones[0].nombre + '</marquee>';
+            if (arrayCanciones.length != 0){
+                audio.attr('src','/canciones/' + arrayCanciones[0].nombre);
+                elemActual = document.getElementsByClassName('cancion')[0];
+                elemActual.style.color = "#4ad3dd";
+                document.getElementsByClassName('cancion-actual')[0].innerHTML = '<marquee>' + arrayCanciones[0].nombre + '</marquee>';
+            }
+            $('.lbl-carpeta')[0].innerHTML = '<i class="far fa-folder-open">   '+canciones[0].path;
                 
             }).fail(function(){
                 alert('No pude cargar las canciones');
@@ -67,7 +95,16 @@ $(function () { //Esta función se ejecuta al cargar el DOM (sintaxis de jquery)
             
         }
 
-        cargarCanciones();
+        function cambiarCarpeta(evento){
+            console.log('cambio carpeta: ', evento.currentTarget.innerText);
+            cargarCanciones(evento.currentTarget.innerText);
+        }
+
+        function subir(){
+            window.location.href = 'http://'+ window.location.host + '/subir';
+        }
+
+        cargarCanciones('');
 
         document.getElementById('prev').addEventListener('click', prev);
         document.getElementById('next').addEventListener('click', next);
@@ -83,7 +120,7 @@ $(function () { //Esta función se ejecuta al cargar el DOM (sintaxis de jquery)
                     audio.attr('src', '/canciones/' + arrayCanciones[indice].nombre);
                     document.getElementsByClassName('cancion-actual')[0].innerHTML = '<marquee>' + arrayCanciones[indice].nombre + '</marquee>';
                     audio[0].play();
-                    elemActual = document.getElementsByTagName('li')[indice];
+                    elemActual = document.getElementsByClassName('cancion')[indice];
                     elemActual.style.color="#4ad3dd";
                 }
             }
@@ -99,7 +136,7 @@ $(function () { //Esta función se ejecuta al cargar el DOM (sintaxis de jquery)
                 audio.attr('src', '/canciones/' + arrayCanciones[indice].nombre);
                 document.getElementsByClassName('cancion-actual')[0].innerHTML = '<marquee>' + arrayCanciones[indice].nombre + '</marquee>';
                 audio[0].play();
-                elemActual = document.getElementsByTagName('li')[indice];
+                elemActual = document.getElementsByClassName('cancion')[indice];
                 elemActual.style.color="#4ad3dd";
             }
             

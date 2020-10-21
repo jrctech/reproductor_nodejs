@@ -25,18 +25,38 @@ h1 {
 
 .contenedor-izquierdo {
     flex: 1;
-    overflow-y: scroll;    
+    overflow-y: scroll; 
 }
 
 .lista-canciones {
     list-style: none;
     margin: 0;
     padding: 0;
+    
+}
+
+.lbl-carpeta {
+    color: grey;
 }
 
 .cancion {
     padding: 20px;
     background: #1c1c1f;
+    border-bottom: 2px solid #121314;
+    cursor: pointer;
+}
+
+.carpeta {
+    color: rgb(9, 107, 236);
+    padding: 20px;
+    border-bottom: 2px solid #121314;
+    cursor: pointer;
+}
+
+.subir {
+    color: rgb(9, 236, 104);
+    padding: 20px;
+    font-style: italic;
     border-bottom: 2px solid #121314;
     cursor: pointer;
 }
