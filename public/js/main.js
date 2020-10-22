@@ -1,4 +1,4 @@
-var rutaActual = '\\canciones';
+var rutaActual = '/canciones';
 var arrayCanciones;
 var arrayCarpetas;
 var indice = 0;
@@ -41,7 +41,7 @@ $(function () { //Esta función se ejecuta al cargar el DOM (sintaxis de jquery)
             lista.empty();
             listaCarpetas.empty();
 
-            if(rutaActual != '\\canciones'){
+            if(rutaActual != '/canciones'){
                 $('<li class = subir><i class="fa-li fas fa-arrow-up"></i></i>Subir...</li>')
                 .on('click', subir)
                 .appendTo(listaCarpetas);
@@ -98,13 +98,13 @@ $(function () { //Esta función se ejecuta al cargar el DOM (sintaxis de jquery)
 
         function cambiarCarpeta(evento){
             console.log('cambio carpeta: ', evento.currentTarget.innerText);
-            rutaActual += '\\' + evento.currentTarget.innerText;
+            rutaActual += '/' + evento.currentTarget.innerText;
             cargarCanciones();
         }
 
         function subir(){
-            console.log(rutaActual, ' ', rutaActual.substring(0,rutaActual.lastIndexOf('\\')));
-            rutaActual = rutaActual.substring(0,rutaActual.lastIndexOf('\\'));
+            console.log(rutaActual, ' ', rutaActual.substring(0,rutaActual.lastIndexOf('/')));
+            rutaActual = rutaActual.substring(0,rutaActual.lastIndexOf('/'));
             cargarCanciones();
         }
 
