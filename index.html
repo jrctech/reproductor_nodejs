@@ -15,42 +15,52 @@
     <link rel="stylesheet" href="/css/main.css">
 </head>
 <body>
-    <h1>Audio Stream JRC Tech</h1>
-    <div class="app">
-        <div class="contenedor-izquierdo">
-            
-            <label for="lista-carpetas" class = "lbl-carpeta"></label>
-
-            <ul class = "lista-carpetas fa-ul">
-                <li class = "carpeta"><i class="fa-li fa fa-check-square"></i>CARPETA1</li>
-                <li class = "carpeta"><i class="fa-li fa fa-check-square"></i>CARPETA2</li>
+    <div class="main-page">
+        <nav class="navbar navbar-expand-sm bg-dark navbar-dark justify-content-center fixed-top">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link" href="#"><audio class = "audio" src="" controls></audio></a>
+                </li>
             </ul>
-            
-            <hr>
-            
-            <ul class="lista-canciones">
-                <li class="cancion"></li>
-                <li class="cancion"></li>
-            </ul>
-            
-        </div>
+        </nav>
 
-        <div class="contenedor-derecho">
-            <audio class = "audio" src="" controls></audio>
-            <label class ="cancion-actual"></label>
-            <div class="botones">
-                <button id = "prev">Anterior</button>
-                <button id = "next">Siguiente</button>
-            </div>
+        <div class="jumbotron">
+            <h1>Audio Stream JRC Tech</h1>
+            <p align="center"><label class ="cancion-actual"></label></p>
+            <button id = "prev">Anterior</button>
+            <button id = "next">Siguiente</button>
         </div>
-
-        <form class="upload-form" action="/canciones" method="post" enctype="multipart/form-data">
-            Subir canción:
-            <input type="file" name="cancion" required>
-            <input type="submit" value="Subir">
-        </form>
-    </div>
     
+        <div class="row app">
+            <div class="col-md-4 contenedor-izquierdo">
+                <h5 class = "lbl-carpeta"></h5>
+                <ul class = "lista-carpetas fa-ul nav flex-column">
+                    
+                </ul>
+
+                
+            </div>
+
+            <div class="col-md-8 contenedor-derecho">
+                <ul class="lista-canciones fa-ul nav nav-pills flex-column">
+
+                </ul>
+            </div>
+            
+            <nav class="navbar navbar-expand-sm bg-dark navbar-dark justify-content-end fixed-bottom">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">
+                            <form class="form-inline upload-form" action="/canciones" method="post" enctype="multipart/form-data">
+                                <input class="form-control" type="file" name="cancion" required>
+                                <button class = "btn btn-success" type="submit">Subir</button>
+                            </form>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </div>
     <script src="/jquery/jquery.js"></script>
     <script src="/js/main.js"></script>
     

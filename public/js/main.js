@@ -9,7 +9,7 @@ $(function () { //Esta función se ejecuta al cargar el DOM (sintaxis de jquery)
     audio[0].addEventListener('ended', function(){
         //console.log('Play has ended');
         if (elemActual != undefined){
-            elemActual.style.color = "#dfe0e6";
+            elemActual.childNodes[0].setAttribute("class", "nav-link");
         }
         indice++;
         if (arrayCanciones[indice] != undefined){
@@ -19,7 +19,7 @@ $(function () { //Esta función se ejecuta al cargar el DOM (sintaxis de jquery)
             document.getElementsByClassName('cancion-actual')[0].innerHTML = '<marquee>' + arrayCanciones[indice].nombre + '</marquee>';
             audio[0].play();
             elemActual = document.getElementsByClassName('cancion')[indice];
-            elemActual.style.color="#4ad3dd";
+            elemActual.childNodes[0].setAttribute("class", "nav-link active");
         }
         else
         {
@@ -42,21 +42,21 @@ $(function () { //Esta función se ejecuta al cargar el DOM (sintaxis de jquery)
             listaCarpetas.empty();
 
             if(rutaActual != '\\canciones'){
-                $('<li class = subir><i class="fa-li fas fa-arrow-up"></i></i>Subir...</li>')
+                $('<li class = "subir"><a class="nav-link" href="#"><i class="fa-li fas fa-arrow-up"></i>Subir...</a></li>')
                 .on('click', subir)
                 .appendTo(listaCarpetas);
             }
             var i=0;
             canciones.forEach(function (cancion){
                 if ((cancion.isDir) && cancion.path == rutaActual){
-                    var nuevaCarpeta = $('<li class = carpeta><i class="fa-li far fa-folder"></i>' + cancion.nombre + '</li>');
+                    var nuevaCarpeta = $('<li class = "carpeta"><i class="fa-li far fa-folder"></i>' + cancion.nombre + '</li>');
                     nuevaCarpeta
                         .on('click', cancion, cambiarCarpeta)
                         .appendTo(listaCarpetas);
                     arrayCarpetas.push(cancion.nombre);
                 }
                 else if((cancion.extension == '.mp3') && (cancion.path == rutaActual)){
-                    var nuevoElemento = $('<li indice = "' + i + '" class = "cancion">'+ cancion.nombre + '</li>');
+                    var nuevoElemento = $('<li indice = "' + i + '" class = "cancion nav-item"><a class="nav-link" href="#"><i class="fa-li fas fa-music"></i>'+ cancion.nombre + '</a></li>');
                     nuevoElemento
                         .on('click', cancion, play)
                         .appendTo(lista);
@@ -71,7 +71,7 @@ $(function () { //Esta función se ejecuta al cargar el DOM (sintaxis de jquery)
             if (arrayCanciones.length != 0){
                 audio.attr('src', '/canciones/' + arrayCanciones[indice].fileIndex);
                 elemActual = document.getElementsByClassName('cancion')[0];
-                elemActual.style.color = "#4ad3dd";
+                elemActual.childNodes[0].setAttribute("class", "nav-link active");
                 document.getElementsByClassName('cancion-actual')[0].innerHTML = '<marquee>' + arrayCanciones[0].nombre + '</marquee>';
             }
             $('.lbl-carpeta')[0].innerHTML = '<i class="far fa-folder-open">   '+rutaActual;
@@ -82,13 +82,11 @@ $(function () { //Esta función se ejecuta al cargar el DOM (sintaxis de jquery)
         }
 
         function play(evento){  
-            elemActual.style.color = "#dfe0e6";
+            elemActual.childNodes[0].setAttribute("class", "nav-link");
             elemActual = evento.currentTarget;
             indice = parseInt(elemActual.attributes.indice.value);
-            elemActual.style.color = "#4ad3dd";
-            //console.log(evento.currentTarget.attributes);
+            elemActual.childNodes[0].setAttribute("class", "nav-link active");
             audio[0].pause();  //Se refiere al objeto audio nativo del DOM
-            //audio.attr('src', '/canciones/' + evento.data.nombre);
             console.log(evento.data.fileIndex);
             audio.attr('src', '/canciones/' + evento.data.fileIndex);
             document.getElementsByClassName('cancion-actual')[0].innerHTML = '<marquee>' + evento.data.nombre + '</marquee>';
@@ -118,14 +116,14 @@ $(function () { //Esta función se ejecuta al cargar el DOM (sintaxis de jquery)
             if (indice -1 >= 0){
                 if (arrayCanciones[indice-1] != undefined){
                     indice--;
-                    elemActual.style.color = "#dfe0e6";
+                    elemActual.childNodes[0].setAttribute("class", "nav-link");
                     //console.log(indice);
                     audio[0].pause();
                     audio.attr('src', '/canciones/' + arrayCanciones[indice].fileIndex);
                     document.getElementsByClassName('cancion-actual')[0].innerHTML = '<marquee>' + arrayCanciones[indice].nombre + '</marquee>';
                     audio[0].play();
                     elemActual = document.getElementsByClassName('cancion')[indice];
-                    elemActual.style.color="#4ad3dd";
+                    elemActual.childNodes[0].setAttribute("class", "nav-link active");
                 }
             }
         };
@@ -134,14 +132,14 @@ $(function () { //Esta función se ejecuta al cargar el DOM (sintaxis de jquery)
             //console.log('Next!');
             if ((arrayCanciones[indice+1] != undefined) && (elemActual != undefined)){
                 indice++;
-                elemActual.style.color = "#dfe0e6";
+                elemActual.childNodes[0].setAttribute("class", "nav-link");
                 //console.log(indice);
                 audio[0].pause();
                 audio.attr('src', '/canciones/' + arrayCanciones[indice].fileIndex);
                 document.getElementsByClassName('cancion-actual')[0].innerHTML = '<marquee>' + arrayCanciones[indice].nombre + '</marquee>';
                 audio[0].play();
                 elemActual = document.getElementsByClassName('cancion')[indice];
-                elemActual.style.color="#4ad3dd";
+                elemActual.childNodes[0].setAttribute("class", "nav-link active");
             }
             
         };
