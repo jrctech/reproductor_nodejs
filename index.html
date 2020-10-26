@@ -16,50 +16,62 @@
 </head>
 <body>
     <div class="main-page">
-        <nav class="navbar navbar-expand-sm bg-dark navbar-dark justify-content-center fixed-top">
+        <nav class="navbar navbar-expand-sm bg-dark navbar-dark fixed-top justify-content-between">
             <ul class="navbar-nav">
                 <li class="nav-item">
-                    <a class="nav-link" href="#"><audio class = "audio" src="" controls></audio></a>
+                    <a class="navbar-brand">Audio Stream JRC - Tech</a>
+                </li>
+                
+                <li class="nav-item">
+                    <a class="nav-link"><label class ="cancion-actual"></label></a>
+                </li>
+            </ul>
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <div class="btn-group">
+                        <button class ="btn btn-outline-warning" id = "prev">Anterior</button>
+                        <button class ="btn btn-outline-warning" id = "next">Siguiente</button>
+                    </div>
                 </li>
             </ul>
         </nav>
 
         <div class="jumbotron">
             <h1>Audio Stream JRC Tech</h1>
-            <p align="center"><label class ="cancion-actual"></label></p>
-            <button id = "prev">Anterior</button>
-            <button id = "next">Siguiente</button>
+            <h5 class = "lbl-carpeta"></h5>
+            <form class="upload-form" action="/canciones" method="post" enctype="multipart/form-data">
+                <input type="file" name="cancion" required accept=".mp3">
+                <button class = "btn btn-outline-success" type="submit">Subir</button>
+            </form>
         </div>
     
         <div class="row app">
-            <div class="col-md-4 contenedor-izquierdo">
-                <h5 class = "lbl-carpeta"></h5>
+            <div class="col-md-6 contenedor-izquierdo">
+                
                 <ul class = "lista-carpetas fa-ul nav flex-column">
                     
                 </ul>
-
-                
             </div>
 
-            <div class="col-md-8 contenedor-derecho">
+            <div class="col-md-6 contenedor-derecho">
                 <ul class="lista-canciones fa-ul nav nav-pills flex-column">
 
                 </ul>
             </div>
-            
-            <nav class="navbar navbar-expand-sm bg-dark navbar-dark justify-content-end fixed-bottom">
-                <ul class="navbar-nav">
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">
-                            <form class="form-inline upload-form" action="/canciones" method="post" enctype="multipart/form-data">
-                                <input class="form-control" type="file" name="cancion" required>
-                                <button class = "btn btn-success" type="submit">Subir</button>
-                            </form>
-                        </a>
-                    </li>
-                </ul>
-            </nav>
         </div>
+
+        <nav class="navbar navbar-expand-sm bg-dark navbar-dark justify-content-center fixed-bottom">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link" href="#"><audio class = "audio" src="" controls></audio></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">
+                        
+                    </a>
+                </li>
+            </ul>
+        </nav>
     </div>
     <script src="/jquery/jquery.js"></script>
     <script src="/js/main.js"></script>

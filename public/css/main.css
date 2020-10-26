@@ -1,5 +1,9 @@
+/*html, body {
+    background: rgba(136, 132, 132, 0.795);
+}*/
+
 .main-page {
-    margin-top: 100px;
+    margin-top: 55px;
     margin-bottom: 200px;
 }
 .carpeta {
@@ -7,4 +11,10 @@
     padding: 5px;
     border-bottom: 2px solid #fff;
     cursor: pointer;
+}
+
+@media (max-width: 600px){
+    .main-page {
+        margin-top: 140px;
+    }
 }
