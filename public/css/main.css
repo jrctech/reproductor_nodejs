@@ -1,17 +1,41 @@
-/*html, body {
-    background: rgba(136, 132, 132, 0.795);
+/*html, body, .app {
+    background: rgba(56, 55, 55, 0.795);
 }*/
 
 .main-page {
     margin-top: 55px;
-    margin-bottom: 200px;
+    margin-bottom: 105px;
 }
 .carpeta {
-    color: rgb(9, 107, 236);
+    /*color: rgb(9, 107, 236);*/
+    color: rgb(55, 152, 182);
     padding: 5px;
     border-bottom: 2px solid #fff;
+    /*border-bottom: 2px solid rgba(56, 55, 55, 0.795);*/
     cursor: pointer;
 }
+
+.cancion {
+    color: rgb(29, 119, 63);
+    padding: 5px;
+    border-bottom: 2px solid #fff;
+    /*border-bottom: 2px solid rgba(56, 55, 55, 0.795);*/
+    cursor: pointer;
+    /*background-color:rgba(65, 67, 68, 0.452) ;*/
+}
+
+.subir, .refresh{
+    color: rgba(29, 119, 64, 0.582);
+    padding: 5px;
+    border-bottom: 2px solid #fff;
+    /*border-bottom: 2px solid rgba(56, 55, 55, 0.795);*/
+    cursor: pointer;
+}
+
+/*.jumbotron {
+    background-color: black;
+    color: white;
+}*/
 
 @media (max-width: 600px){
     .main-page {
