@@ -5,6 +5,7 @@ const fs = require('fs');
 const mediaserver = require('mediaserver');
 const multer = require('multer');
 const { data } = require('jquery');
+const favicon = require('serve-favicon');
 
 var opcionesMulter = multer.diskStorage({
     destination: function(req, file, cb) {
@@ -17,12 +18,13 @@ var opcionesMulter = multer.diskStorage({
 
 var upload = multer({storage: opcionesMulter});
 
-var canciones = [];
+var canciones = []; 
 var fileNumber;
 actualizarJSON();
 
 /*  Configuraciones */
 app.use(express.static('public'));
+app.use(favicon(path.join(__dirname,'public','img','favicon.ico')));
 app.use('/jquery', express.static(path.join(__dirname, 'node_modules', 'jquery', 'dist')));
 
 
